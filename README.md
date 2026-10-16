@@ -2,14 +2,14 @@
 ## What problem it solves?
 * Makes truth table
 * Makes CCNF and CDNF form of your expression
-* Print your expression in {|&!}, {/}, {%}, {&^1} basises
+* Print your expression in {|&!}, {/}, {%}, {&^1} basis
 ## Syntax
 * & - and
 * | - or
 * ! - not
 * = - equals
-* ^ - xor (doesnot equals)
-* \> (<) - impication
+* ^ - xor (does not equals)
+* \> (<) - implication
 * / - nand (not and)
 * % - nor (not or)
 ## How to use
