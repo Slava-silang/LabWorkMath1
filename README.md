@@ -9,7 +9,7 @@
 * ! - not
 * = - equals
 * ^ - xor (doesnot equals)
-* > (<) - impication
+* \> (<) - impication
 * / - nand (not and)
 * % - nor (not or)
 ## How to use
