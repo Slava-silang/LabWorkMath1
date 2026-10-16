@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#define NOR_BASIS 0
+#define NAND_BASIS 1
+#include "nor_nand.h"
 
 char *join(const char *a, char op, const char *b) 
 {
@@ -37,7 +40,7 @@ char *join(const char *a, char op, const char *b)
 
 char *make_not(const char *a, int basis)
 {
-    if (basis) {
+    if (basis == NAND_BASIS) {
         char *result = join(a, '/', a);
         return result;
     } else {
@@ -48,7 +51,7 @@ char *make_not(const char *a, int basis)
 
 char *make_or(const char *a, const char *b, int basis)
 {
-    if (basis) {
+    if (basis == NAND_BASIS) {
         char *left = join(a, '/', a);
         char *right = join(b, '/', b);
         char *result = join(left, '/', right);
@@ -69,7 +72,7 @@ char *make_or(const char *a, const char *b, int basis)
 
 char *make_and(const char *a, const char *b, int basis)
 {
-    if (basis) {
+    if (basis == NAND_BASIS) {
         char *left = join(a, '/', b);
         char *result = join(left, '/', left);
 
@@ -84,6 +87,22 @@ char *make_and(const char *a, const char *b, int basis)
         free(left);
         free(right);
         
+        return result;
+    }
+}
+
+char *make_constant(char value, char *c, int basis) 
+{
+    char *not_c = make_not(c, basis);
+    char *result;
+
+    if (value == '1') {
+        result = make_or(c, not_c, basis);
+        free(not_c);
+        return result;
+    } else {
+        result = make_and(c, not_c, basis);
+        free(not_c);
         return result;
     }
 }

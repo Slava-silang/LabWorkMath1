@@ -3,8 +3,14 @@
 #include "normal_form.h"
 #include "print_table.h"
 #include "fictive.h"
+#include "nor_nand.h"
 #ifndef MAX
 #define MAX 4096
+#endif
+#ifndef BASIS
+#define NOR_BASIS 0
+#define NAND_BASIS 1
+#define BASIS
 #endif
 
 int main(int argc, char *argv[])
@@ -50,10 +56,13 @@ int main(int argc, char *argv[])
         if(used[i])
             variables[count++] = i;
     }
+    printf("%d\n", variables[0]);
     print_table(postfix, variables, count);
     print_normal_form(postfix, variables, count, 1);
     print_normal_form(postfix, variables, count, 0);
     print_fictitious_var(postfix, variables, count);
+    print_nor_nand(postfix, count, variables, NOR_BASIS);
+    print_nor_nand(postfix, count, variables, NAND_BASIS);
 
     return 0;
 }
